@@ -5,12 +5,13 @@
 (package-initialize) 
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
-;;安装elpa
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+;;安装elpa 做版本检测 暂时不使用这个配置
+;(when (>= emacs-major-version 24)
+;  (require 'package)
+;  (package-initialize)
+;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;  )
+
 ;;空格代替tab
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
