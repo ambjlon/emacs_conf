@@ -86,3 +86,5 @@
 (paren-activate) ; activating
 
 (global-linum-mode t)
+
+(require 'setup-helm)

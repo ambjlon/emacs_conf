@@ -4,9 +4,11 @@
  (global-set-key (kbd "M-p")
      (lambda () (interactive) (previous-line 5)))
 ;;修复windows下面Backspace键为c-h
-(global-set-key "\C-h" 'backward-delete-char-untabify)
-(global-set-key "\d" 'delete-char)
-
+;(global-set-key "\C-h" 'backward-delete-char-untabify)
+;(global-set-key "\d" 'delete-char)
+;(global-set-key "\d" 'backward-delete-char)
+;(normal-erase-is-backspace-mode 1)
+	
 ;使用C-w在一行任意位置删除该整行，使用M-w在一行任意位置复制整行
 (defadvice kill-ring-save (before slickcopy activate compile)  
    (interactive  
