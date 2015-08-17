@@ -3,7 +3,6 @@
        '(("gnu" . "http://elpa.gnu.org/packages/") 
          ("melpa" . "http://melpa.org/packages/"))) 
 (package-initialize) 
-
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
 ;;安装elpa 做版本检测 暂时不使用这个配置
 ;(when (>= emacs-major-version 24)
@@ -17,7 +16,7 @@
 (setq default-tab-width 4)
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
 (require 'yasnippet)
-(yas/initialize)
+;;(yas/initialize)
 ;
 (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20150408.1132")
 (require 'auto-complete-config)
@@ -27,8 +26,19 @@
 ;;emacs+emacs-eclim+eclim+eclipse
 (require 'init-eclim)
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-use-fuzzy t)
  '(eclim-eclipse-dirs (quote ("~/eclipse")))
- '(eclim-executable "~/eclipse/eclim"))
+ '(eclim-executable "~/eclipse/eclim")
+ '(ede-project-directories
+   (quote
+    ("/home/jianglong.cjl/tmp/myproject/include" "/home/jianglong.cjl/tmp/myproject/src" "/home/jianglong.cjl/tmp/myproject")))
+ '(sr-speedbar-auto-refresh t)
+ '(sr-speedbar-default-width 30)
+ '(sr-speedbar-right-side nil))
 
 ;;配置导航树
 (global-set-key [f8] 'neotree-toggle)
@@ -37,13 +47,23 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-candidate-face ((t (:inherit popup-face :stipple nil :background "blue" :foreground "black"))))
+ '(ac-candidate-mouse-face ((t (:inherit popup-menu-mouse-face :background "green" :distant-foreground "yellow" :foreground "red"))))
+ '(ac-completion-face ((t (:background "green" :foreground "red"))))
+ '(ac-emacs-eclim-candidate-face ((t (:background "green" :foreground "red"))))
+ '(ac-emacs-eclim-selection-face ((t (:background "yellow" :foreground "black"))))
+ '(ac-gtags-candidate-face ((t (:inherit ac-candidate-face :background "magenta" :foreground "black"))))
+ '(ac-gtags-selection-face ((t (:inherit ac-selection-face :background "yellow" :foreground "black"))))
+ '(ac-selection-face ((t (:inherit popup-menu-selection-face :background "yellow" :foreground "black"))))
  '(highlight-indentation-face ((t (:inherit fringe :background "color-244" :foreground "brightred"))))
+ '(hl-tags-face ((t (:inherit highlight :background "magenta" :foreground "white" :strike-through nil))))
  '(neo-dir-link-face ((t (:foreground "brightred"))))
  '(neo-file-link-face ((t (:foreground "green"))))
  '(neo-header-face ((t (:foreground "red"))))
  '(neo-root-dir-face ((t (:foreground "green"))))
  '(paren-face-match ((t (:background "green"))))
- '(paren-face-mismatch ((t (:background "red" :foreground "white")))))
+ '(paren-face-mismatch ((t (:background "red" :foreground "white"))))
+ '(sp-pair-overlay-face ((t (:inherit highlight :background "brightblack" :foreground "brightwhite")))))
 ;热键设置
 (require 'hotkey)
 ;把波浪线后缀的备份文件统一管理
@@ -78,13 +98,37 @@
 ;(projectile-global-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
-
-;输入M-x 自动启动helm命令的匹配
-;(global-set-key (kbd "M-x") 'helm-M-x)
-;(require 'localparen)
-(require 'mic-paren) ; loading
-(paren-activate) ; activating
-
+;smartparens
+(require 'smartparens-conf) ; loading
+;启动时显示行号
 (global-linum-mode t)
-
+;
 (require 'setup-helm)
+;引入helm-tags-conf
+(require 'helm-gtags-conf)
+
+(require 'sr-speedbar-conf)
+
+;;cedet conf from https://www.youtube.com/watch?v=Ib914gNr0ys
+;(semantic-mode 1)
+;(defun my:add-semantic-to-autocomplete()
+;  (add-to-list 'ac-sources 'ac-source-semantic)
+;)
+;(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
+;(require 'ede)
+;(global-ede-mode)
+;(ede-cpp-root-project "my project" :file "~/my_program/src/main.cpp"
+;                      :include-path '("/../my_inc"))
+;(global-semantic-idle-scheduler-mode 1)
+
+(require 'cedet-conf)
+
+;;nxml tags matching
+(require 'hl-tags-mode)
+(add-hook 'sgml-mode-hook (lambda () (hl-tags-mode 1)))
+(add-hook 'nxml-mode-hook (lambda () (hl-tags-mode 1)))
+;; function-args conf
+;(require 'function-args-conf)
+
+;browse kill ring conf
+;(require 'browse-kill-ring-conf)
