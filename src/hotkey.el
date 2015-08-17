@@ -3,6 +3,7 @@
      (lambda () (interactive) (next-line 5)))
  (global-set-key (kbd "M-p")
      (lambda () (interactive) (previous-line 5)))
+
 ;;修复windows下面Backspace键为c-h
 ;(global-set-key "\C-h" 'backward-delete-char-untabify)
 ;(global-set-key "\d" 'delete-char)
@@ -20,6 +21,7 @@
     (if mark-active (list (region-beginning) (region-end))  
       (list (line-beginning-position)  
             (line-beginning-position 2))))) 
+
 ;定义全选热键
 (global-set-key (kbd "C-x a") 'mark-whole-buffer)
 
@@ -28,7 +30,9 @@
   (interactive)
    (indent-region (point-min) (point-max))
 (message "format successfully"))
-;;绑定到F7键
 (global-set-key [f7] 'indent-whole)
+
+;默认的，跳到到buffer首部M-<, 跳到buffer尾部M->
+
 
 (provide 'hotkey)
