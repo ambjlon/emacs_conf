@@ -24,18 +24,18 @@
 (ac-config-default)
 
 ;;emacs+emacs-eclim+eclim+eclipse
-(require 'init-eclim)
+;(require 'init-eclim)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-use-fuzzy t)
- '(eclim-eclipse-dirs (quote ("~/eclipse")))
- '(eclim-executable "~/eclipse/eclim")
- '(ede-project-directories
-   (quote
-    ("/home/jianglong.cjl/tmp/myproject/include" "/home/jianglong.cjl/tmp/myproject/src" "/home/jianglong.cjl/tmp/myproject")))
+; '(eclim-eclipse-dirs (quote ("~/eclipse")))
+; '(eclim-executable "~/eclipse/eclim")
+; '(ede-project-directories
+;   (quote
+;    ("/home/jianglong.cjl/tmp/myproject/include" "/home/jianglong.cjl/tmp/myproject/src" "/home/jianglong.cjl/tmp/myproject")))
  '(sr-speedbar-auto-refresh t)
  '(sr-speedbar-default-width 30)
  '(sr-speedbar-right-side nil))
@@ -121,7 +121,7 @@
 ;                      :include-path '("/../my_inc"))
 ;(global-semantic-idle-scheduler-mode 1)
 
-(require 'cedet-conf)
+;(require 'cedet-conf)
 
 ;;nxml tags matching
 (require 'hl-tags-mode)
@@ -132,3 +132,5 @@
 
 ;browse kill ring conf
 ;(require 'browse-kill-ring-conf)
+
+(require 'utf8-set)
