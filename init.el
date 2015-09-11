@@ -31,11 +31,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-use-fuzzy t)
-; '(eclim-eclipse-dirs (quote ("~/eclipse")))
-; '(eclim-executable "~/eclipse/eclim")
-; '(ede-project-directories
-;   (quote
-;    ("/home/jianglong.cjl/tmp/myproject/include" "/home/jianglong.cjl/tmp/myproject/src" "/home/jianglong.cjl/tmp/myproject")))
  '(sr-speedbar-auto-refresh t)
  '(sr-speedbar-default-width 30)
  '(sr-speedbar-right-side nil))
@@ -55,7 +50,13 @@
  '(ac-gtags-candidate-face ((t (:inherit ac-candidate-face :background "magenta" :foreground "black"))))
  '(ac-gtags-selection-face ((t (:inherit ac-selection-face :background "yellow" :foreground "black"))))
  '(ac-selection-face ((t (:inherit popup-menu-selection-face :background "yellow" :foreground "black"))))
- '(highlight-indentation-face ((t (:inherit fringe :background "color-244" :foreground "brightred"))))
+ '(helm-grep-file ((t (:foreground "color-234" :underline t))))
+ '(helm-selection ((t (:background "color-237" :distant-foreground "color-235"))))
+ '(helm-selection-line ((t (:inherit nil :background "color-237" :distant-foreground "color-235"))))
+ '(helm-source-header ((t (:background "color-237" :foreground "color-235" :weight bold :height 1.3 :family "Sans Serif"))))
+ '(helm-visible-mark ((t (:background "color-237" :distant-foreground "color-235"))))
+ '(highlight-indentation-current-column-face ((t (:background "magenta"))))
+ '(highlight-indentation-face ((t (:inherit fringe :background "color-243" :foreground "white"))))
  '(hl-tags-face ((t (:inherit highlight :background "magenta" :foreground "white" :strike-through nil))))
  '(neo-dir-link-face ((t (:foreground "brightred"))))
  '(neo-file-link-face ((t (:foreground "green"))))
