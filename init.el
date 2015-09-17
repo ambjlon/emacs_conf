@@ -42,14 +42,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-candidate-face ((t (:inherit popup-face :stipple nil :background "blue" :foreground "black"))))
+ '(ac-candidate-face ((t (:inherit popup-face :stipple nil :background "color-235" :foreground "color-255"))))
  '(ac-candidate-mouse-face ((t (:inherit popup-menu-mouse-face :background "green" :distant-foreground "yellow" :foreground "red"))))
- '(ac-completion-face ((t (:background "green" :foreground "red"))))
+ '(ac-completion-face ((t (:background "color-235" :foreground "color-255"))))
  '(ac-emacs-eclim-candidate-face ((t (:background "green" :foreground "red"))))
  '(ac-emacs-eclim-selection-face ((t (:background "yellow" :foreground "black"))))
  '(ac-gtags-candidate-face ((t (:inherit ac-candidate-face :background "magenta" :foreground "black"))))
- '(ac-gtags-selection-face ((t (:inherit ac-selection-face :background "yellow" :foreground "black"))))
- '(ac-selection-face ((t (:inherit popup-menu-selection-face :background "yellow" :foreground "black"))))
+ '(ac-gtags-selection-face ((t (:inherit ac-selection-face :background "black" :foreground "red"))))
+ '(ac-php-candidate-face ((t (:background "color-235" :foreground "brightwhite"))))
+ '(ac-php-selection-face ((t (:background "brightred" :foreground "black"))))
+ '(ac-selection-face ((t (:inherit popup-menu-selection-face :background "brightred" :foreground "black"))))
+ '(flycheck-error ((t (:inherit error :background "black" :overline nil :underline (:color foreground-color :style wave)))))
  '(helm-grep-file ((t (:foreground "color-234" :underline t))))
  '(helm-selection ((t (:background "color-237" :distant-foreground "color-235"))))
  '(helm-selection-line ((t (:inherit nil :background "color-237" :distant-foreground "color-235"))))
@@ -106,7 +109,7 @@
 ;
 (require 'setup-helm)
 ;引入helm-tags-conf
-(require 'helm-gtags-conf)
+;;(require 'helm-gtags-conf)
 
 (require 'sr-speedbar-conf)
 
@@ -135,3 +138,6 @@
 ;(require 'browse-kill-ring-conf)
 
 (require 'utf8-set)
+
+(require 'go-conf)
+(require 'php-conf)
