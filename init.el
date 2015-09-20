@@ -139,5 +139,5 @@
 
 (require 'utf8-set)
 
-(require 'go-conf)
+;;(require 'go-conf)
 (require 'php-conf)
