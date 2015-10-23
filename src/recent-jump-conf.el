@@ -1,0 +1,6 @@
+(setq recent-jump-threshold 4)
+(setq recent-jump-ring-length 10)
+(global-set-key (kbd "M-;") 'recent-jump-jump-backward)
+(global-set-key (kbd "M-'") 'recent-jump-jump-forward)
+(require 'recent-jump)
+(provide 'recent-jump-conf)

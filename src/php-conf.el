@@ -15,9 +15,14 @@
           '(lambda ()
              (auto-complete-mode t)
              (require 'ac-php)
-             (setq ac-sources  '(ac-source-php ) )
+             ;;(setq ac-sources  '(ac-source-php ) )
+             (add-to-list 'ac-sources 'ac-source-php)
              ;;(setq ac-php-use-cscope-flag  t )  ;;enable cscope
+
+             (require 'yasnippet)
+             (setq yas-snippet-dirs '("~/.emacs.d/yasmate"))
              (yas-global-mode 1)
+             
              (define-key php-mode-map  (kbd "C-]") 'ac-php-find-symbol-at-point)   ;goto define
              (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back   ) ;go back
              ))

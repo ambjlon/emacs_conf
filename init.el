@@ -14,10 +14,12 @@
 ;;空格代替tab
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
+
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
-(require 'yasnippet)
-;;(yas/initialize)
-;
+;(require 'yasnippet)
+;(yas/initialize)
+
+
 (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20150408.1132")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20150408.1132/dict")
@@ -128,16 +130,21 @@
 ;(require 'cedet-conf)
 
 ;;nxml tags matching
-(require 'hl-tags-mode)
-(add-hook 'sgml-mode-hook (lambda () (hl-tags-mode 1)))
-(add-hook 'nxml-mode-hook (lambda () (hl-tags-mode 1)))
+(add-hook 'sgml-mode-hook '(lambda ()
+                            (require 'hl-tags-mode)
+                            (hl-tags-mode 1)
+                            ))
+(add-hook 'nxml-mode-hook '(lambda ()
+                             (require 'hl-tags-mode)
+                             (hl-tags-mode 1)
+                             ))
 ;; function-args conf
 ;(require 'function-args-conf)
 
 ;browse kill ring conf
 ;(require 'browse-kill-ring-conf)
-
 (require 'utf8-set)
-
-;;(require 'go-conf)
+(require 'my-go-conf)
 (require 'php-conf)
+(require 'ace-jump-conf)
+(require 'recent-jump-conf)

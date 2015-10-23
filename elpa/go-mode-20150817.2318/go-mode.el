@@ -602,10 +602,10 @@ current line will be returned."
     ;;
     ;;     struct /* why? */ { 
     (while (progn
-      (skip-chars-forward "^{")
-      (forward-char)
-      (or (go-in-string-or-comment-p)
-          (looking-back "\\(struct\\|interface\\)\\s-*{"))))
+             (skip-chars-forward "^{")
+             (forward-char)
+             (or (go-in-string-or-comment-p)
+                 (looking-back "\\(struct\\|interface\\)\\s-*{"))))
     (setq orig-level (go-paren-level))
     (while (>= (go-paren-level) orig-level)
       (skip-chars-forward "^}")
@@ -1415,7 +1415,8 @@ description at POINT."
             (message "No description found for expression at point")
           (message "%s" (mapconcat #'identity description "\n"))))
     (file-error (message "Could not run godef binary"))))
-
+;;godef-jump-back batch from https://gist.github.com/syohex/5883383 chenjianglong 2015-10-14
+(defvar godef--marker-list nil)
 (defun godef-jump (point &optional other-window)
   "Jump to the definition of the expression at POINT."
   (interactive "d")
@@ -1423,10 +1424,25 @@ description at POINT."
       (let ((file (car (godef--call point))))
         (if (not (godef--successful-p file))
             (message "%s" (godef--error file))
-          (push-mark)
+          ;;(push-mark)
+          (push (point-marker) godef--marker-list)
           (ring-insert find-tag-marker-ring (point-marker))
           (godef--find-file-line-column file other-window)))
     (file-error (message "Could not run godef binary"))))
+
+;;godef-jump-back batch from https://gist.github.com/syohex/5883383 chenjianglong 2015-10-14
+(defun godef-jump-back ()
+  "Pop back to where `godef-jump' was last invoked"
+  (interactive)
+  (when (null godef--marker-list)
+    (error "Marker list is empty. Can't pop back"))
+  (let ((marker (pop godef--marker-list)))
+    (switch-to-buffer (or (marker-buffer marker)
+                          (error "Buffer has been deleted")))
+    (goto-char (marker-position marker))
+    ;; Cleanup the marker so as to avoid them piling up.
+    (set-marker marker nil nil)))
+;;end batch
 
 (defun godef-jump-other-window (point)
   (interactive "d")
