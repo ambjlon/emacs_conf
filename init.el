@@ -148,3 +148,4 @@
 (require 'php-conf)
 (require 'ace-jump-conf)
 (require 'recent-jump-conf)
+(require 'copy-paste-conf)
