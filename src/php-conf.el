@@ -2,7 +2,7 @@
 
 ;;2. 语法检查,需要安装php,需要使用php的语法检错做后端;一定要把php安装到系统路径，不然会提示flymake配置，很蛋疼的。
 ;;2.1使用flymake(库关联检查,emacs内置)
-(add-hook 'php-mode-hook 'flymake-mode)
+;;(add-hook 'php-mode-hook 'flymake-mode)
 ;;2.2flycheck(需要安装); 
 ;;(add-hook 'php-mode-hook 'flycheck-mode) ;;flycheck 不起作用，蛋疼 还试了flymake-php这个包，
 ;;2.3 使用flymake-php包 暂时使用这个吧
