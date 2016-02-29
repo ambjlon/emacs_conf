@@ -95,7 +95,7 @@
 (autoload 'jedi:setup "jedi" nil t)
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
-;(provide 'jedi-conf)
+
 
 ;projectile conf https://github.com/bbatsov/projectile
 (projectile-global-mode)
