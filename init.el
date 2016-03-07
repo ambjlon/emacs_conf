@@ -1,11 +1,5 @@
-(require 'package) 
-(setq package-archives 
-       '(("gnu" . "http://elpa.gnu.org/packages/") 
-         ("melpa" . "http://melpa.org/packages/"))) 
-(package-initialize) 
-
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
-
+(require 'start-conf)
 (require 'auto-complete-conf)
 (require 'neotree-conf)
 (require 'basic-edit-conf)
@@ -17,7 +11,7 @@
 (require 'recent-jump-conf)
 (require 'copy-paste-conf)
 (require 'projectile-conf)
-(require 'browse-kill-ring-conf)
+;;(require 'browse-kill-ring-conf)
 
 
 ;;外观定制
