@@ -1,4 +1,4 @@
-(global-set-key "C-m" '(lambda ()
+(global-set-key "\C-m" '(lambda ()
                            (interactive)
                            (popup-menu 'yank-menu)))
 (provide 'browse-kill-ring-conf)
