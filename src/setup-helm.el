@@ -1,5 +1,5 @@
-(try-require 'helm-config)
-(try-require 'helm-grep)
+(require 'helm-config)
+(require 'helm-grep)
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -27,7 +27,6 @@
  helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
  helm-buffers-fuzzy-matching t          ; fuzzy matching buffer names when non-nil
                                         ; useful in helm-mini that lists buffers
-
  )
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
@@ -63,12 +62,11 @@
 (define-key global-map [remap find-tag] 'helm-etags-select)
 
 (define-key global-map [remap list-buffers] 'helm-buffers-list)
-(setf *start-time* (current-time))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: helm-swoop                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Locate the helm-swoop folder to your path
-(try-require 'helm-swoop)
+(require 'helm-swoop)
 
 ;; Change the keybinds to whatever you like :)
 (global-set-key (kbd "C-c h o") 'helm-swoop)
@@ -93,7 +91,5 @@
 (setq helm-swoop-speed-or-color t)
 
 (helm-mode 1)
-(setf *end-time* (current-time))
-(message "fuck :%s" (float-time (time-subtract *end-time* *start-time*)))
 
 (provide 'setup-helm)

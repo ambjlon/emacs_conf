@@ -1,3 +1,8 @@
+;;统计消耗时间的语句
+;;(setf *start-time* (current-time))
+;;(setf *end-time* (current-time))
+;;(message "fuck :%s" (float-time (time-subtract *end-time* *start-time*)))
+
 ;; Function to collect information of packages.
 (defvar missing-packages-list nil
   "List of packages that `try-require' can't find.")
