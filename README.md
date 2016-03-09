@@ -1,2 +1,3 @@
 # emacs_conf
-emacs configuration
+20160309前后因为mac上的emacs启动慢, 建立了simplified分支以及本分支.
+本分支是20160309的时候最完善的分支, 后续会在master上进行配置的优化. 本分之作为备份使用, 不进行任何修改了.
