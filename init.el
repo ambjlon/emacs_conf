@@ -1,7 +1,9 @@
+;;helm中使用了tramp, tramp会导致启动加慢. 下面的语句可以防止这种现象.
 (setq tramp-ssh-controlmaster-options
       (concat "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
+;;使用try-require
 ;;(require 'try-require)
 ;;(try-require 'start-conf)
 (require 'start-conf)
