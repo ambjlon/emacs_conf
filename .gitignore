@@ -5,5 +5,5 @@
 /projectile.cache
 *.elc
 .python-environments/
-elpa/archives/gnu/archive-contents
-elpa/archives/gnu/archive-contents.signed
+elpa/archives/
+elpa/archives/
