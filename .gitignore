@@ -1,0 +1,10 @@
+/ac-comphist.dat
+/auto-save-list
+/recentf
+/projectile-bookmarks.eld
+/projectile.cache
+*.elc
+*~
+.python-environments/
+elpa/archives/
+elpa/archives/
