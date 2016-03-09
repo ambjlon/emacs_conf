@@ -1,0 +1,9 @@
+/ac-comphist.dat
+/auto-save-list
+/recentf
+/projectile-bookmarks.eld
+/projectile.cache
+*.elc
+.python-environments/
+elpa/archives/gnu/archive-contents
+elpa/archives/gnu/archive-contents.signed
