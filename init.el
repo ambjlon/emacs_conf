@@ -19,6 +19,9 @@
 ;(require 'yasnippet)
 ;(yas/initialize)
 
+;;不显示菜单栏 工具栏
+(tool-bar-mode 0)
+(menu-bar-mode 0)
 
 (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20150408.1132")
 (require 'auto-complete-config)
