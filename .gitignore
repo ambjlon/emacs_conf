@@ -8,3 +8,6 @@
 .python-environments/
 elpa/archives/
 elpa/archives/
+elpa/jedi-core-20151214.705/build/
+elpa/jedi-core-20151214.705/dist/
+elpa/jedi-core-20151214.705/jediepcserver.egg-info/
