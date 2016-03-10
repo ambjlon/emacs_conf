@@ -35,5 +35,7 @@
 ;启动时显示行号
 (global-linum-mode t)
 
+;;不显示菜单栏
+(menu-bar-mode 0) 
 
 (provide 'basic-edit-conf)
