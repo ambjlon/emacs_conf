@@ -1,26 +1,15 @@
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
 (require 'package) 
 (setq package-archives 
        '(("gnu" . "http://elpa.gnu.org/packages/") 
          ("melpa" . "http://melpa.org/packages/"))) 
 (package-initialize) 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
-;;安装elpa 做版本检测 暂时不使用这个配置
-;(when (>= emacs-major-version 24)
-;  (require 'package)
-;  (package-initialize)
-;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;  )
+(require 'basic-edit-conf)
 
-;;空格代替tab
-(setq-default indent-tabs-mode nil)
-(setq default-tab-width 4)
 
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
 ;(require 'yasnippet)
 ;(yas/initialize)
-
-;;不显示菜单栏 工具栏
-(menu-bar-mode 0)
 
 (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20150408.1132")
 (require 'auto-complete-config)
@@ -77,21 +66,6 @@
  '(sp-pair-overlay-face ((t (:inherit highlight :background "brightblack" :foreground "brightwhite")))))
 ;热键设置
 (require 'hotkey)
-;把波浪线后缀的备份文件统一管理
-(setq backup-directory-alist (quote (("." . "~/.backups"))))
-
-;;启动Pymacs和ropemacs。
-;;pymacs用来操纵ropemacs，ropemacs是rope的接口，rope是python的代码重构库，用来补全。
-;;所以这些配置是用来在Emacs和python之间交互的，能在Emacs下执行python的表达式。本来想做python的补全的。
-;;; Initialize Pymacs
-;;(autoload 'pymacs-apply "pymacs")
-;;(autoload 'pymacs-call "pymacs")
-;;(autoload 'pymacs-eval "pymacs" nil t)
-;;(autoload 'pymacs-exec "pymacs" nil t)
-;;(autoload 'pymacs-load "pymacs" nil t)
-;;; Initialize Rope
-;;(pymacs-load "ropemacs" "rope-")
-;;(setq ropemacs-enable-autoimport t)
 
 ;jedi配置，y cannot i call it in jedi-conf? 
 (autoload 'jedi:setup "jedi" nil t)
@@ -111,9 +85,6 @@
 (helm-projectile-on)
 ;smartparens
 (require 'smartparens-conf) ; loading
-;启动时显示行号
-(global-linum-mode t)
-;
 (require 'setup-helm)
 ;引入helm-tags-conf
 ;;(require 'helm-gtags-conf)
