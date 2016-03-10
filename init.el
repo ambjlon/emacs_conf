@@ -1,6 +1,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
 (require 'elap-conf)
 (require 'basic-edit-conf)
+(require 'python-conf)
 
 
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
@@ -60,13 +61,6 @@
  '(paren-face-match ((t (:background "green"))))
  '(paren-face-mismatch ((t (:background "red" :foreground "white"))))
  '(sp-pair-overlay-face ((t (:inherit highlight :background "brightblack" :foreground "brightwhite")))))
-;热键设置
-(require 'hotkey)
-
-;jedi配置，y cannot i call it in jedi-conf? 
-(autoload 'jedi:setup "jedi" nil t)
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
 
 
 ;projectile conf https://github.com/bbatsov/projectile
