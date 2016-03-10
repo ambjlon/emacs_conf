@@ -2,7 +2,7 @@
 (require 'elap-conf)
 (require 'basic-edit-conf)
 (require 'python-conf)
-
+(require 'php-conf)
 
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
 ;(require 'yasnippet)
@@ -111,7 +111,6 @@
 ;(require 'browse-kill-ring-conf)
 (require 'utf8-set)
 (require 'my-go-conf)
-(require 'php-conf)
 (require 'ace-jump-conf)
 (require 'recent-jump-conf)
 (require 'copy-paste-conf)
