@@ -1,9 +1,5 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
-(require 'package) 
-(setq package-archives 
-       '(("gnu" . "http://elpa.gnu.org/packages/") 
-         ("melpa" . "http://melpa.org/packages/"))) 
-(package-initialize) 
+(require 'elap-conf)
 (require 'basic-edit-conf)
 
 
