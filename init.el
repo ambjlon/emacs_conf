@@ -6,7 +6,7 @@
 ;;使用try-require
 ;;(require 'try-require)
 ;;(try-require 'start-conf)
-(require 'start-conf)
+(require 'elap-conf)
 (require 'auto-complete-conf)
 (require 'neotree-conf)
 (require 'basic-edit-conf)
