@@ -4,7 +4,7 @@
 ;;2.1使用flymake(库关联检查,emacs内置)
 ;;(add-hook 'php-mode-hook 'flymake-mode)
 ;;2.2flycheck(需要安装); 
-;;(add-hook 'php-mode-hook 'flycheck-mode) ;;flycheck 不起作用，蛋疼 还试了flymake-php这个包，
+(add-hook 'php-mode-hook 'flycheck-mode) ;;flycheck 不起作用，蛋疼 还试了flymake-php这个包，
 ;;2.3 使用flymake-php包 暂时使用这个吧
 ;;(require 'flymake-php)
 ;;(add-hook 'php-mode-hook 'flymake-php-load)
