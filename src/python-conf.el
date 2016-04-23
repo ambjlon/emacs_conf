@@ -6,6 +6,7 @@
 ;;添加python跳转回跳功能
 ;;参考http://txt.arboreus.com/2013/02/21/jedi.el-jump-to-definition-and-back.html
 ;;这个跳转回跳功能还是不够完善, 很多时候跳不出去.
+;;还可以考虑使用elpy插件, 但是这个插件的补全功能是使用company的.
 (defvar jedi:goto-stack '())
 (defun jedi:jump-to-definition ()
   (interactive)
