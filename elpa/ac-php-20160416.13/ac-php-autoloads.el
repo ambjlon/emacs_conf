@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("ac-php-comm-tags-data.el" "ac-php-pkg.el"
-;;;;;;  "ac-php-remake-tags-bat.el" "ac-php-remake-tags-without-cscope-bat.el"
-;;;;;;  "ac-php.el") (22014 6212 810697 764000))
+;;;### (autoloads nil nil ("ac-php-comm-tags-data.el" "ac-php-company.el"
+;;;;;;  "ac-php-core.el" "ac-php-pkg.el" "ac-php.el") (22301 62474
+;;;;;;  449186 448000))
 
 ;;;***
 
