@@ -1,8 +1,13 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/src"))
 (require 'elap-conf)
+
 (require 'basic-edit-conf)
+
 (require 'python-conf)
+
 (require 'php-conf)
+
+(require 'nxml-conf)
 
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
 ;(require 'yasnippet)
@@ -53,7 +58,7 @@
  '(helm-visible-mark ((t (:background "green" :distant-foreground "brightwhite"))))
  '(highlight-indentation-current-column-face ((t (:background "magenta"))))
  '(highlight-indentation-face ((t (:inherit fringe :background "color-243" :foreground "white"))))
- '(hl-tags-face ((t (:inherit highlight :background "magenta" :foreground "white" :strike-through nil))))
+ '(hl-tags-face ((t (:box nil :strike-through nil :underline (:color "brightblack" :style wave)))))
  '(neo-dir-link-face ((t (:foreground "brightred"))))
  '(neo-file-link-face ((t (:foreground "green"))))
  '(neo-header-face ((t (:foreground "red"))))
@@ -95,15 +100,9 @@
 
 ;(require 'cedet-conf)
 
-;;nxml tags matching
-(add-hook 'sgml-mode-hook '(lambda ()
-                            (require 'hl-tags-mode)
-                            (hl-tags-mode 1)
-                            ))
-(add-hook 'nxml-mode-hook '(lambda ()
-                             (require 'hl-tags-mode)
-                             (hl-tags-mode 1)
-                             ))
+
+
+
 ;; function-args conf
 ;(require 'function-args-conf)
 
