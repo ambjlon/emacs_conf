@@ -9,6 +9,9 @@
 
 (require 'nxml-conf)
 
+;;smartparens
+(require 'smartparens-conf) ; loading
+
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
 ;(require 'yasnippet)
 ;(yas/initialize)
@@ -26,6 +29,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-use-fuzzy t)
+ '(sp-wrap-from-point t)
  '(sr-speedbar-auto-refresh t)
  '(sr-speedbar-default-width 30)
  '(sr-speedbar-right-side nil))
@@ -65,7 +69,10 @@
  '(neo-root-dir-face ((t (:foreground "green"))))
  '(paren-face-match ((t (:background "green"))))
  '(paren-face-mismatch ((t (:background "red" :foreground "white"))))
- '(sp-pair-overlay-face ((t (:inherit highlight :background "brightblack" :foreground "brightwhite")))))
+ '(sp-pair-overlay-face ((t (:inherit highlight :background "brightblack" :foreground "brightwhite"))))
+ '(sp-show-pair-enclosing ((t (:background "black" :foreground "green" :underline "black"))))
+ '(sp-show-pair-match-face ((t (:background "color-16" :foreground "green" :underline "brightblack"))))
+ '(sp-show-pair-mismatch-face ((t (:background "color-16" :foreground "red")))))
 
 
 ;projectile conf https://github.com/bbatsov/projectile
@@ -78,8 +85,7 @@
 ;(projectile-global-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
-;smartparens
-(require 'smartparens-conf) ; loading
+
 (require 'setup-helm)
 ;引入helm-tags-conf
 ;;(require 'helm-gtags-conf)
