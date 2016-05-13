@@ -42,12 +42,12 @@
 (global-set-key (kbd "C-c l") 'sp-backward-kill-sexp)
 
 ;;17 交换sexp
-(global-set-key (kbd "C-c t") 'sp-transpose-sexp)
+;;(global-set-key (kbd "C-c t") 'sp-transpose-sexp)
 
 ;;18 去掉包装
 ;;(global-set-key (kbd "C-c C-t") 'sp-backward-unwrap-sexp)
 ;;19 添加包装
-;;(global-set-key (kbd "C-c t") 'sp-backward-unwrap-sexp)
+;;(global-set-key (kbd "C-c t") 'sp-backward-unwrap-sexp) ;;C-c t和F7格式化冲突
 
 
 
