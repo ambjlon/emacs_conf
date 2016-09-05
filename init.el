@@ -9,8 +9,10 @@
 
 (require 'nxml-conf)
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
 ;;smartparens
-;(require 'smartparens-conf) ; loading
+(require 'smartparens-conf) ; loading
 
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
 ;(require 'yasnippet)
@@ -29,6 +31,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-use-fuzzy t)
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(ansi-term-color-vector
+   [unspecified "#202020" "#fb9fb1" "#acc267" "#ddb26f" "#6fc2ef" "#e1a3ee" "#6fc2ef" "#e0e0e0"])
+ '(custom-enabled-themes (quote (manoj-dark)))
+ '(custom-safe-themes
+   (quote
+    ("6aae2eb39ce5d67379a4718cdb295b819c4100ddda8d07fa8eab53289a0b7551" "134101847bd0a2ae22c72cbfda59cddf1039f9bb2b71e5ffd704feed5b409cfc" "e989d10979a9bd3230077945a8169cf6988cbc7ca7ca95fc7dfe373d573eea85" "63fa843551cceac4958cc0e40e5e36c1ff79e39e1a4916017c225aca677de9d0" "dc594e589d7927c234c35de25a355203ab702008494cbd5213a9f17458411d85" "2daf79d4048f0f7280f6e6b763c8c81f8cef96ef8444b42ea0eb3023fe387eac" "bf4226951ab37488d5631f2fc15416a557ea41a4629ff63a257ee7dcdf3f2fb9" "83333ecaaaed863a4ab7f9f0247de7264b9d388e68d8c705ed0e01584ab6881a" default)))
  '(sp-wrap-from-point t)
  '(sr-speedbar-auto-refresh t)
  '(sr-speedbar-default-width 30)
@@ -52,14 +64,20 @@
  '(ac-php-selection-face ((t (:background "brightred" :foreground "black"))))
  '(ac-selection-face ((t (:inherit popup-menu-selection-face :background "brightred" :foreground "black"))))
  '(flycheck-error ((t (:inherit error :background "black" :overline nil :underline (:color foreground-color :style wave)))))
- '(helm-candidate-number ((t (:background "brightred" :foreground "brightwhite"))))
+ '(helm-buffer-directory ((t (:background "black" :foreground "blue"))))
+ '(helm-buffer-not-saved ((t (:foreground "brightred"))))
+ '(helm-buffer-process ((t (:foreground "green"))))
+ '(helm-candidate-number ((t (:background "color-186" :foreground "black"))))
+ '(helm-ff-directory ((t (:background "black" :foreground "color-21"))))
+ '(helm-ff-dotted-directory ((t (:background "black" :foreground "color-186"))))
+ '(helm-ff-executable ((t (:foreground "color-40"))))
  '(helm-grep-file ((t (:background "color-16" :foreground "brightwhite" :underline t))))
  '(helm-header ((t (:inherit nil :background "black"))))
  '(helm-match ((t (:background "black" :foreground "brightred"))))
- '(helm-selection ((t (:background "green" :distant-foreground "brightwhite"))))
+ '(helm-selection ((t (:inherit nil :background "color-234" :underline nil))))
  '(helm-selection-line ((t (:inherit nil :background "green" :distant-foreground "brightwhite"))))
- '(helm-source-header ((t (:background "brightred" :foreground "brightwhite" :weight bold :height 1.3 :family "Sans Serif"))))
- '(helm-visible-mark ((t (:background "green" :distant-foreground "brightwhite"))))
+ '(helm-source-header ((t (:background "black" :foreground "brightwhite" :weight bold :height 1.3 :family "Sans Serif"))))
+ '(helm-visible-mark ((t (:background "color-94" :distant-foreground "brightwhite"))))
  '(highlight-indentation-current-column-face ((t (:background "magenta"))))
  '(highlight-indentation-face ((t (:inherit fringe :background "color-243" :foreground "white"))))
  '(hl-tags-face ((t (:box nil :strike-through nil :underline (:color "brightblack" :style wave)))))
@@ -119,3 +137,4 @@
 (require 'ace-jump-conf);;helm-swoop或许是更好的选择
 (require 'recent-jump-conf)
 (require 'copy-paste-conf)
+(require 'hack-syntax-table)

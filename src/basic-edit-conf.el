@@ -1,6 +1,10 @@
 ;;一次跳跃n=8行，多行跳跃
-(global-set-key (kbd "M-n")
-                (lambda () (interactive) (next-line 8)))
+(defun next-line-n ()
+  (interactive)
+  (next-line 8))
+;;(global-set-key (kbd "M-n")
+;;                (lambda () (interactive) (next-line 8)))
+(global-set-key (kbd "M-n") 'next-line-n)
 (global-set-key (kbd "M-p")
                 (lambda () (interactive) (previous-line 8)))
 
