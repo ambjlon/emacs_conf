@@ -15,8 +15,8 @@
 (require 'smartparens-conf) ; loading
 
 ;;yasnippet配置，据说这段配置应该放到自动补全前面的，因为自动补全用到了yasnippet
-;(require 'yasnippet)
-;(yas/initialize)
+;;(require 'yasnippet)
+;;(yas/initialize)
 
 (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20150408.1132")
 (require 'auto-complete-config)
