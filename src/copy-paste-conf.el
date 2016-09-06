@@ -22,7 +22,7 @@ This command does not push text to `kill-ring'."
    (progn
      (forward-word arg)
      (point))))
-(global-set-key (kbd "C-M-d") 'shell-delete-word)
+(global-set-key (kbd "M-d") 'shell-delete-word)
 ;;1.4删除前一个word, 类似shell, 会删掉非word类型的字符. 不copy到kill-ring.
 (defun shell-backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
@@ -37,7 +37,7 @@ This command does not push text to `kill-ring'."
   "Copy words at point into kill-ring"
   (interactive "P")
   (delete-thing 'forward-word 'backward-word arg))
-(global-set-key (kbd "C-c w") 'forward-delete-word)
+(global-set-key (kbd "C-M-d") 'forward-delete-word)
 ;;空白删除操作
 ;;1.5 删除当前点附件的所有水平空白符(包括制表符?). 默认键M-\
 ;;1.6 删除当前点附件的所有水平空白符(包括制表符?),但要留一个. 默认键M-SPACE, 和mac的Alfred有冲突. 重新绑定
