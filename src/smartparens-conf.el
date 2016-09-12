@@ -81,7 +81,6 @@
                   (&optional arg)
                 (interactive "p")
                 (sp-wrap-with-pair ,val)))))
-(sp-delete-pair 1)
 (def-pairs ((paren        . "(")
             (bracket      . "[")
             (brace        . "{")
