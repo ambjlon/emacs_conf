@@ -52,7 +52,7 @@
 ;;光标位于非sexp(sexp的定义参看印象笔记)的时候:'sp-kill-sexp向后查找到下一个sexp,并剪切之;'sp-backward-kill-sexp向前查找到下一个sexp并剪切之. 向前向后都是按字节流向前向后, 并非递归到父sexp.
 ;;当想接剪切由各种括号表达的sexp或者string(也是sexp)的时候, 先把光标移动到合适的位置, 使得'sp-backward-kill-sexp或者'sp-kill-sexp能定位到的sexp正好是你想剪切的sexp, 然后执行'sp-kill-sexp或'sp-backward-kill-sexp即可. 一般来说定位当这样的sexp的首字符, 也就是各种括号或者' ", 然后执行'sp-kill-sexp就可以了.
 ;;15 剪切前面的sexp
-(global-set-key (kbd "C-c f") 'sp-kill-sexp)
+(global-set-key (kbd "C-c k") 'sp-kill-sexp)
 ;;16 剪切后面的sexp
 (global-set-key (kbd "C-c b") 'sp-backward-kill-sexp)
 
@@ -66,7 +66,7 @@
 
 ;;添加去除包装
 ;;18 前向去掉包装
-(global-set-key (kbd "C-c \]") 'sp-backward-unwrap-sexp)
+(global-set-key (kbd "C-c \]") 'sp-unwrap-sexp)
 ;;19 反向去掉包装
 (global-set-key (kbd "C-c \}") 'sp-backward-unwrap-sexp) 
 ;;定义包装函数, 这些函数都是包装右侧sexp的.
@@ -81,7 +81,7 @@
                   (&optional arg)
                 (interactive "p")
                 (sp-wrap-with-pair ,val)))))
-
+(sp-delete-pair 1)
 (def-pairs ((paren        . "(")
             (bracket      . "[")
             (brace        . "{")
