@@ -65,10 +65,16 @@
 ;; (global-set-key (kbd "C-c t") 'sp-transpose-sexp)
 
 ;;添加去除包装
+
+;;参考https://github.com/Fuco1/smartparens/issues/647 升级smartparens以后就能够去除单双引号的包装了.
+;;此外在linux系统上更新smartparens以后会报错:Symbol's function definition is void: loop. 这可能和elpa的更新机制有关, 从其他地方拷贝一份配置过来即可. 参考:https://github.com/Fuco1/smartparens/issues/420
 ;;18 前向去掉包装
+;;as|df uio 'sd' 会去掉单引号''
 (global-set-key (kbd "C-c \]") 'sp-unwrap-sexp)
 ;;19 反向去掉包装
+;;{dfsaf} woshi chi|na会去掉{}
 (global-set-key (kbd "C-c \}") 'sp-backward-unwrap-sexp) 
+
 ;;定义包装函数, 这些函数都是包装右侧sexp的.
 (defmacro def-pairs (pairs)
   `(progn
