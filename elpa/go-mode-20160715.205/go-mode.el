@@ -312,11 +312,11 @@ Consider using godoc-gogetdoc instead for more accurate results."
         (if (not (godef--successful-p file))
             (message "%s" (godef--error file))
           (go--godoc (format "%s %s"
-                         (file-name-directory file)
-                         (if (or (string= first "type") (string= first "const"))
-                             (cadr name-parts)
-                           (car name-parts)))
-                    godoc-and-godef-command)))
+                             (file-name-directory file)
+                             (if (or (string= first "type") (string= first "const"))
+                                 (cadr name-parts)
+                               (car name-parts)))
+                     godoc-and-godef-command)))
     (file-error (message "Could not run godef binary"))))
 
 (defun godoc-gogetdoc (point)
@@ -329,17 +329,17 @@ You can install gogetdoc with 'go get -u github.com/zmb3/gogetdoc'."
       (error "Cannot use gogetdoc on a buffer without a file name"))
   (let ((posn (format "%s:#%d" (shell-quote-argument (file-truename buffer-file-name)) (1- (go--position-bytes point))))
         (out (godoc--get-buffer "<at point>")))
-  (with-current-buffer (get-buffer-create "*go-gogetdoc-input*")
-    (setq buffer-read-only nil)
-    (erase-buffer)
-    (go--insert-modified-files)
-    (call-process-region (point-min) (point-max) "gogetdoc" nil out nil
-                         "-modified"
-                         (format "-pos=%s" posn)))
-  (with-current-buffer out
-    (goto-char (point-min))
-    (godoc-mode)
-    (display-buffer (current-buffer) t))))
+    (with-current-buffer (get-buffer-create "*go-gogetdoc-input*")
+      (setq buffer-read-only nil)
+      (erase-buffer)
+      (go--insert-modified-files)
+      (call-process-region (point-min) (point-max) "gogetdoc" nil out nil
+                           "-modified"
+                           (format "-pos=%s" posn)))
+    (with-current-buffer out
+      (goto-char (point-min))
+      (godoc-mode)
+      (display-buffer (current-buffer) t))))
 
 (defun go--kill-new-message (url)
   "Make URL the latest kill and print a message."
@@ -498,8 +498,8 @@ For mode=set, all covered lines will have this weight."
 (defvar go-mode-map
   (let ((m (make-sparse-keymap)))
     (unless (boundp 'electric-indent-chars)
-        (define-key m "}" #'go-mode-insert-and-indent)
-        (define-key m ")" #'go-mode-insert-and-indent))
+      (define-key m "}" #'go-mode-insert-and-indent)
+      (define-key m ")" #'go-mode-insert-and-indent))
     (define-key m (kbd "C-c C-a") #'go-import-add)
     (define-key m (kbd "C-c C-j") #'godef-jump)
     (define-key m (kbd "C-x 4 C-c C-j") #'godef-jump-other-window)
@@ -735,10 +735,10 @@ current line will be returned."
     ;;
     ;;     struct /* why? */ {
     (while (progn
-      (skip-chars-forward "^{")
-      (forward-char)
-      (or (go-in-string-or-comment-p)
-          (looking-back "\\(struct\\|interface\\)\\s-*{"))))
+             (skip-chars-forward "^{")
+             (forward-char)
+             (or (go-in-string-or-comment-p)
+                 (looking-back "\\(struct\\|interface\\)\\s-*{"))))
     (setq orig-level (go-paren-level))
     (while (>= (go-paren-level) orig-level)
       (skip-chars-forward "^}")
@@ -1448,14 +1448,14 @@ archive files in /pkg/"
      (lambda (topdir)
        (let ((pkgdir (concat topdir "/pkg/")))
          (cl-mapcan (lambda (dir)
-                   (mapcar (lambda (file)
-                             (let ((sub (substring file (length pkgdir) -2)))
-                               (unless (or (go--string-prefix-p "obj/" sub) (go--string-prefix-p "tool/" sub))
-                                 (mapconcat #'identity (cdr (split-string sub "/")) "/"))))
-                           (if (file-directory-p dir)
-                               (directory-files dir t "\\.a$"))))
-                 (if (file-directory-p pkgdir)
-                     (go--directory-dirs pkgdir)))))
+                      (mapcar (lambda (file)
+                                (let ((sub (substring file (length pkgdir) -2)))
+                                  (unless (or (go--string-prefix-p "obj/" sub) (go--string-prefix-p "tool/" sub))
+                                    (mapconcat #'identity (cdr (split-string sub "/")) "/"))))
+                              (if (file-directory-p dir)
+                                  (directory-files dir t "\\.a$"))))
+                    (if (file-directory-p pkgdir)
+                        (go--directory-dirs pkgdir)))))
      (go-root-and-paths)))
    #'string<))
 
@@ -1571,7 +1571,7 @@ description at POINT."
             (message "No description found for expression at point")
           (message "%s" (mapconcat #'identity description "\n"))))
     (file-error (message "Could not run godef binary"))))
-
+(defvar godef--marker-list nil)
 (defun godef-jump (point &optional other-window)
   "Jump to the definition of the expression at POINT."
   (interactive "d")
@@ -1579,10 +1579,22 @@ description at POINT."
       (let ((file (car (godef--call point))))
         (if (not (godef--successful-p file))
             (message "%s" (godef--error file))
-          (push-mark)
+          ;;(push-mark)
+          (push (point-marker) godef--marker-list)
           (ring-insert find-tag-marker-ring (point-marker))
           (godef--find-file-line-column file other-window)))
     (file-error (message "Could not run godef binary"))))
+(defun godef-jump-back ()
+  "Pop back to where `godef-jump' was last invoked"
+  (interactive)
+  (when (null godef--marker-list)
+    (error "Marker list is empty. Can't pop back"))
+  (let ((marker (pop godef--marker-list)))
+    (switch-to-buffer (or (marker-buffer marker)
+                          (error "Buffer has been deleted")))
+    (goto-char (marker-position marker))
+    ;; Cleanup the marker so as to avoid them piling up.
+    (set-marker marker nil nil)))
 
 (defun godef-jump-other-window (point)
   (interactive "d")
