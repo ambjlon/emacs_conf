@@ -18,13 +18,57 @@
 ;;(require 'yasnippet)
 ;;(yas/initialize)
 
-(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20150408.1132")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20150408.1132/dict")
-(ac-config-default)
-
 ;;emacs+emacs-eclim+eclim+eclipse
-;(require 'init-eclim)
+;;(require 'init-eclim)
+
+;;配置导航树
+(global-set-key [f8] 'neotree-toggle)
+
+;projectile conf https://github.com/bbatsov/projectile
+(projectile-global-mode)
+(setq projectile-indexing-method 'native)
+(setq projectile-enable-caching t)
+(setq projectile-require-project-root nil)
+
+;projectile config
+;(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+(require 'setup-helm)
+
+;;引入helm-tags-conf
+;;(require 'helm-gtags-conf)
+
+(require 'sr-speedbar-conf)
+
+;;cedet conf from https://www.youtube.com/watch?v=Ib914gNr0ys
+;(semantic-mode 1)
+;(defun my:add-semantic-to-autocomplete()
+;  (add-to-list 'ac-sources 'ac-source-semantic)
+;)
+;(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
+;(require 'ede)
+;(global-ede-mode)
+;(ede-cpp-root-project "my project" :file "~/my_program/src/main.cpp"
+;                      :include-path '("/../my_inc"))
+;(global-semantic-idle-scheduler-mode 1)
+;(require 'cedet-conf)
+
+;; function-args conf
+;(require 'function-args-conf)
+
+;browse kill ring conf
+;(require 'browse-kill-ring-conf)
+(require 'utf8-set)
+(require 'my-go-conf)
+(require 'ace-jump-conf);;helm-swoop或许是更好的选择
+(require 'recent-jump-conf)
+(require 'copy-paste-conf)
+(require 'hack-syntax-table)
+(require 'auto-complete-conf)
+
+;;自定义变量
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -48,8 +92,7 @@
  '(sr-speedbar-default-width 30)
  '(sr-speedbar-right-side nil))
 
-;;配置导航树
-(global-set-key [f8] 'neotree-toggle)
+;;色彩配置
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -100,49 +143,3 @@
  '(sp-show-pair-match-face ((t (:background "color-16" :foreground "green" :underline "brightblack"))))
  '(sp-show-pair-mismatch-face ((t (:background "color-16" :foreground "red")))))
 
-
-;projectile conf https://github.com/bbatsov/projectile
-(projectile-global-mode)
-(setq projectile-indexing-method 'native)
-(setq projectile-enable-caching t)
-(setq projectile-require-project-root nil)
-
-;projectile config
-;(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-
-(require 'setup-helm)
-;引入helm-tags-conf
-;;(require 'helm-gtags-conf)
-
-(require 'sr-speedbar-conf)
-
-;;cedet conf from https://www.youtube.com/watch?v=Ib914gNr0ys
-;(semantic-mode 1)
-;(defun my:add-semantic-to-autocomplete()
-;  (add-to-list 'ac-sources 'ac-source-semantic)
-;)
-;(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
-;(require 'ede)
-;(global-ede-mode)
-;(ede-cpp-root-project "my project" :file "~/my_program/src/main.cpp"
-;                      :include-path '("/../my_inc"))
-;(global-semantic-idle-scheduler-mode 1)
-
-;(require 'cedet-conf)
-
-
-
-
-;; function-args conf
-;(require 'function-args-conf)
-
-;browse kill ring conf
-;(require 'browse-kill-ring-conf)
-(require 'utf8-set)
-(require 'my-go-conf)
-(require 'ace-jump-conf);;helm-swoop或许是更好的选择
-(require 'recent-jump-conf)
-(require 'copy-paste-conf)
-(require 'hack-syntax-table)
