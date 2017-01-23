@@ -138,6 +138,8 @@
  '(neo-root-dir-face ((t (:foreground "green"))))
  '(paren-face-match ((t (:background "green"))))
  '(paren-face-mismatch ((t (:background "red" :foreground "white"))))
+ '(popup-summary-face ((t (:inherit popup-face :background "color-234" :foreground "color-255"))))
+ '(popup-tip-face ((t (:background "color-101" :foreground "black"))))
  '(sp-pair-overlay-face ((t (:inherit highlight :background "brightblack" :foreground "brightwhite"))))
  '(sp-show-pair-enclosing ((t (:background "black" :foreground "green" :underline "black"))))
  '(sp-show-pair-match-face ((t (:background "color-16" :foreground "green" :underline "brightblack"))))
