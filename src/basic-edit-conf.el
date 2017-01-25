@@ -2,11 +2,19 @@
 (defun next-line-n ()
   (interactive)
   (next-line 8))
-;;(global-set-key (kbd "M-n")
-;;                (lambda () (interactive) (next-line 8)))
+(defun previous-line-n ()
+  (interactive)
+  (previous-line 8))
+
 (global-set-key (kbd "M-n") 'next-line-n)
-(global-set-key (kbd "M-p")
-                (lambda () (interactive) (previous-line 8)))
+(global-set-key (kbd "M-p") 'previous-line-n)
+
+;;M-n在markdown-mode中是next-link的绑定, 
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (define-key markdown-mode-map (kbd "M-n") 'next-line-n)
+            (define-key markdown-mode-map (kbd "M-p") 'previous-line-n)
+            ))
 
 ;;格式化整个文件函数,比如c-mode java-mode html-mode等等，并将这个功能绑定到F7
 (defun indent-whole ()
