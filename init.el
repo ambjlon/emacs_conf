@@ -11,13 +11,11 @@
 (require 'neotree-conf)
 (require 'basic-edit-conf)
 (require 'smartparens-conf) 
-(require 'setup-helm)
 (require 'sr-speedbar-conf)
 (require 'utf8-set)
 (require 'ace-jump-conf)
 (require 'recent-jump-conf)
 (require 'copy-paste-conf)
-(require 'projectile-conf)
 ;;(require 'browse-kill-ring-conf)
 
 

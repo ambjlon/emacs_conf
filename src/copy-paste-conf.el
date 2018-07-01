@@ -11,13 +11,8 @@
 ;;1. delete操作. 只是删除不会将删除的内容放到kill-ring中, 也就是不能在接下来的操作中将这些delete的内容粘贴到其他的地方.
 ;;1.1 删除下一个字符. 默认键C-d
 ;;1.2 删除前一个字符. 默认键del键
-;;1.3 删除当前点附件的所有水平空白符(包括制表符?). 默认键M-\
-;;1.3 删除当前点附件的所有水平空白符(包括制表符?),但要留一个. 默认键M-SPACE, 和mac的Alfred有冲突. 重新绑定
-(global-set-key "\M-]" 'just-one-space)
-;;1.4 删除当前行附近的空白行. 默认键C-x C-o. 在空白行按此键删除的只剩一个空白行, 若是只有一个空白行按此键删除所有的也就是1个空白行. 在非空白行按此键,删除当前行.
-;;1.5 M-^ 将当前行和上一行合并为一行.
-;;1.6 删除下一个word. 不copy到kill-ring. 这个功能不会常用吧?
-(defun my-delete-word (arg)
+;;1.3 删除下一个word, 类似shell, 会删掉非word类型的字符. 不copy到kill-ring.
+(defun shell-delete-word (arg)
   "Delete characters forward until encountering the end of a word.
 With argument, do this that many times.
 This command does not push text to `kill-ring'."
@@ -27,65 +22,29 @@ This command does not push text to `kill-ring'."
    (progn
      (forward-word arg)
      (point))))
-;;(global-set-key (kbd "C-M-d") 'my-delete-word)
-;;1.7删除前一个word. 不copy到kill-ring.
-(defun my-backward-delete-word (arg)
+(global-set-key (kbd "M-d") 'shell-delete-word)
+;;1.4删除前一个word, 类似shell, 会删掉非word类型的字符. 不copy到kill-ring.
+(defun shell-backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument, do this that many times.
 This command does not push text to `kill-ring'."
   (interactive "p")
-  (my-delete-word (- arg)))
-;;(global-set-key (kbd "C-M-m") 'my-backward-delete-word)
-;;1.8 从当前位置删除至行尾,不copy到kill-ring.
-(defun my-delete-line ()
-  "Delete text from current position to end of line char.
-This command does not push text to `kill-ring'."
-  (interactive)
-  (delete-region
-   (point)
-   (progn (end-of-line 1) (point)))
-  (delete-char 1))
-;;(global-set-key (kbd "C-M-k") 'my-delete-line)
-;;1.9 从单前位置删除至行首,不copy到kill-ring.
-(defun my-delete-line-backward ()
-  "Delete text between the beginning of the line to the cursor position.
-This command does not push text to `kill-ring'."
-  (interactive)
-  (let (p1 p2)
-    (setq p1 (point))
-    (beginning-of-line 1)
-    (setq p2 (point))
-    (delete-region p1 p2)))
-;;(global-set-key (kbd "C-M-i") 'my-delete-line-backward)
-;;1.10 删除整行,不copy到kill-ring
-;; from http://stackoverflow.com/questions/637351/emacs-how-to-delete-text-without-kill-ring
-(defun ruthlessly-kill-line ()
-  "Deletes a line, but does not put it in the kill-ring. (kinda)"
-  (interactive)
-  (move-beginning-of-line 1)
-  (kill-line 1)
-  (setq kill-ring (cdr kill-ring)))
-;;(global-set-key (kbd "C-M-w") 'ruthlessly-kill-line)
-
-;;2. kill操作.相当于常说的剪切, 将kill的内容copy到kill-ring
-;;2.1 向前向后kill一个字符,没必要将这个字符放到kill-ring,所以使用向前向后delele一个字符即可.
-;;2.2 向后kill一个word, 而且若是行尾操作,不会包括换行. 默认键 M-d
-;;2.3 向前kill一个word, 而且若是行首操作,不会包括上一行的换行符. 默认M-DEL
-;;2.4 我不编辑文章,不会有向前向后kill至句子开始结尾的需求~_~
-;;2.5 向前kill至行首, 而且若是行首操作,不会包括上一行的换行.
-(defun backward-kill-line (arg)
-  "Kill ARG lines backward."
-  (interactive "p")
-  (kill-line (- 1 arg)))
-;;(global-set-key (kbd "C-i") 'backward-kill-line)
-;;2.6向后kill至行尾, 而且若是行尾操作,不会包括换行.默认C-k
-;;from http://emacsredux.com/blog/2013/04/09/kill-whole-line/
-(defun smart-kill-whole-line (&optional arg)
-  "A simple wrapper around `kill-whole-line' that respects indentation."
+  (shell-delete-word (- arg)))
+(global-set-key (kbd "M-DEL") 'shell-backward-delete-word)
+;;1.5 向前删除下一个word, 不删除非word类型的字符.使用delete-word(C-M-w)即可达到目的.
+;;1.6 向后删除下一个word, 不删除非word类型的字符. 修改了delete-word函数实现的.
+(defun forward-delete-word (&optional arg)
+  "Copy words at point into kill-ring"
   (interactive "P")
-  (kill-whole-line 0);;我把arg写死了,因为我不知道怎么在bindkey的时候给参数赋值,调用一个定制的函数.
-  (back-to-indentation))
-;;(global-set-key (kbd "C-k") 'smart-kill-whole-line)
+  (delete-thing 'forward-word 'backward-word arg))
+(global-set-key (kbd "C-M-d") 'forward-delete-word)
+;;空白删除操作
+;;1.7 删除当前点附件的所有水平空白符(包括制表符?).
+(global-set-key (kbd "C-c <SPC>") 'delete-horizontal-space)
+;;1.8 删除当前行附近的空白行. 默认键C-x C-o. 在空白行按此键删除的只剩一个空白行, 若是只有一个空白行按此键删除所有的也就是1个空白行. 
+;;1.7 M-^ 将当前行和上一行合并为一行.
+;;1.9 删除当前点附件的所有水平空白符(包括制表符?),但要留一个. 默认键M-SPACE, 和mac的Alfred有冲突. 重新绑定
+;;(global-set-key "\M-]" 'just-one-space) 2016-5-10配置smartparens时发生冲突, 暂时注释掉这里.
 
 
 ;;---------------------------------------------------------------
@@ -189,7 +148,6 @@ This command does not push text to `kill-ring'."
 
 ;;定义全选热键
 (global-set-key (kbd "C-x a") 'mark-whole-buffer)
-
 ;;copy base function
 (defun get-point (symbol &optional arg)
   "get the point"
@@ -230,8 +188,6 @@ This command does not push text to `kill-ring'."
           (funcall pasteMe))
       (funcall pasteMe))
     ))
-
-
 (provide 'copy-paste-conf)
 
 ;;旧的相关的配置,废弃!!
@@ -246,3 +202,53 @@ This command does not push text to `kill-ring'."
 ;;    (if mark-active (list (region-beginning) (region-end))  
 ;;      (list (line-beginning-position)  
 ;;            (line-beginning-position 2))))) 
+
+;; ;;1.8 从当前位置删除至行尾,不copy到kill-ring.
+;; (defun my-delete-line ()
+;;   "Delete text from current position to end of line char.
+;; This command does not push text to `kill-ring'."
+;;   (interactive)
+;;   (delete-region
+;;    (point)
+;;    (progn (end-of-line 1) (point)))
+;;   (delete-char 1))
+;; (global-set-key (kbd "C-M-k") 'my-delete-line)
+;; ;;1.9 从单前位置删除至行首,不copy到kill-ring.
+;; (defun my-delete-line-backward ()
+;;   "Delete text between the beginning of the line to the cursor position.
+;; This command does not push text to `kill-ring'."
+;;   (interactive)
+;;   (let (p1 p2)
+;;     (setq p1 (point))
+;;     (beginning-of-line 1)
+;;     (setq p2 (point))
+;;     (delete-region p1 p2)))
+;; (global-set-key (kbd "C-M-i") 'my-delete-line-backward)
+;; ;;1.10 删除整行,不copy到kill-ring
+;; ;; from http://stackoverflow.com/questions/637351/emacs-how-to-delete-text-without-kill-ring
+;; (defun ruthlessly-kill-line ()
+;;   "Deletes a line, but does not put it in the kill-ring. (kinda)"
+;;   (interactive)
+;;   (move-beginning-of-line 1)
+;;   (kill-line 1)
+;;   (setq kill-ring (cdr kill-ring)))
+;; (global-set-key (kbd "C-M-w") 'ruthlessly-kill-line)
+;;2. kill操作.相当于常说的剪切, 将kill的内容copy到kill-ring
+;;2.1 向前向后kill一个字符,没必要将这个字符放到kill-ring,所以使用向前向后delele一个字符即可.
+;;2.2 向后kill一个word, 而且若是行尾操作,不会包括换行. 默认键 M-d
+;;2.3 向前kill一个word, 而且若是行首操作,不会包括上一行的换行符. 默认M-DEL
+;;2.4 我不编辑文章,不会有向前向后kill至句子开始结尾的需求~_~
+;;2.5 向前kill至行首, 而且若是行首操作,不会包括上一行的换行.
+;; (defun backward-kill-line (arg)
+;;   "Kill ARG lines backward."
+;;   (interactive "p")
+;;   (kill-line (- 1 arg)))
+;; ;;(global-set-key (kbd "C-i") 'backward-kill-line)
+;; ;;2.6向后kill至行尾, 而且若是行尾操作,不会包括换行.默认C-k
+;; ;;from http://emacsredux.com/blog/2013/04/09/kill-whole-line/
+;; (defun smart-kill-whole-line (&optional arg)
+;;   "A simple wrapper around `kill-whole-line' that respects indentation."
+;;   (interactive "P")
+;;   (kill-whole-line 0);;我把arg写死了,因为我不知道怎么在bindkey的时候给参数赋值,调用一个定制的函数.
+;;   (back-to-indentation))
+;; ;;(global-set-key (kbd "C-k") 'smart-kill-whole-line)
