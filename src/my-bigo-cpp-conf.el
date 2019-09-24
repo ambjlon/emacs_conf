@@ -1,4 +1,6 @@
 (require 'rtags)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode));;.h文件也归为c++-mode
+
 (cmake-ide-setup)
 
 (setq cmake-ide-rc-executable "/usr/local/bin/rc")
@@ -23,16 +25,29 @@
 (setq cmake-ide-make-command "make -j12") ;;设置编译指令 并行编译 https://github.com/atilaneves/cmake-ide/issues/97
 ;;还可以设置 cmake-ide-cmake-command cmake-ide-compile-command
 
+(define-key c++-mode-map (kbd "M-.") 'rtags-find-symbol-at-point)
+(define-key c++-mode-map (kbd "M-,") 'rtags-find-references-at-point)
 
 (defun my-company-cc-mode-setup()
   (push '(company-rtags) company-backends)
   )
 (add-hook 'c-mode-common-hook 'my-company-cc-mode-setup)
 
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 4)
+(require 'flycheck-rtags)
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
+;;(put 'flycheck-disabled-checkers 'safe-local-variable #'listp)
+
+;;rtags和helm集成
+(setq rtags-display-result-backend 'helm)
+(setq rtags-autostart-diagnostics t)
+(defun my-flycheck-rtags-setup ()
+  (flycheck-select-checker 'rtags)
+  (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+  (setq-local flycheck-check-syntax-automatically nil))
+(add-hook 'c-mode-hook #'my-flycheck-rtags-setup)
+(add-hook 'c++-mode-hook #'my-flycheck-rtags-setup)
+(add-hook 'objc-mode-hook #'my-flycheck-rtags-setup)
+
 (provide 'my-bigo-cpp-conf)
 
 

@@ -1,0 +1,1 @@
+(define-package "flycheck-rtags" "20180619.824" "RTags Flycheck integration." '((emacs "24") (flycheck "0.23") (rtags "2.10")) :commit "d3d4bc9b7b829d39628a1af96f06eb23ba48670c" :authors '(("Christian Schwarzgruber" . "c.schwarzgruber.cs@gmail.com")) :maintainer '("Christian Schwarzgruber" . "c.schwarzgruber.cs@gmail.com") :url "http://rtags.net")
