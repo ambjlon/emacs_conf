@@ -1,3 +1,6 @@
+(setq c-default-style "stroustrup") ;;c代码用4个空格对齐
+(add-hook 'before-save-hook 'delete-trailing-whitespace) ;;保存前删掉每行末尾的空白符
+
 (require 'rtags)
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode));;.h文件也归为c++-mode
 
@@ -5,7 +8,7 @@
 
 (setq cmake-ide-rc-executable "/usr/local/bin/rc")
 
-(setq cmake-ide-build-pool-dir "/data/chenjianglong/cmake-ide-build-pool")
+(setq cmake-ide-build-pool-dir "/data1/chenjianglong/cmake-ide-build-pool")
 (setq cmake-ide-build-pool-use-persistent-naming t)
 ;;(set 'cmake-ide-build-dir "/data/chenjianglong/brec_live_recall/cmake-build-debug")
 
@@ -68,4 +71,3 @@
 ;;    )
 ;;   )
 ;; (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-
